@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admission Prediction</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+<h1>Department Admission Prediction</h1>
+
+<form method="POST" action="/predict">
+
+<label>Your GPA</label>
+<input type="number" step="0.01" name="gpa" required><br>
+
+<label>First Choice Department</label>
+<select name="first_choice" required>
+<option>Computer Science</option>
+<option>Engineering</option>
+<option>Information System</option>
+<option>Biology</option>
+<option>Mathematics</option>
+</select><br>
+
+<label>Seats Available</label>
+<input type="number" name="seats" required><br>
+
+<label>Total Applicants</label>
+<input type="number" name="total_applicants" required>
+
+<button type="submit">Predict</button>
+
+</form>
+
+</body>
+</html>

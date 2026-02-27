@@ -1,0 +1,11 @@
+year,gpa,preferred_department,admitted_department,seats,total_applicants,admitted_to_preference
+2025,3.8,Computer Science,Computer Science,50,120,1
+2025,3.5,Engineering,Engineering,60,100,1
+2025,3.2,Computer Science,Engineering,50,120,0
+2025,3.6,Mathematics,Mathematics,40,70,1
+2025,3.1,Information System,Computer Science,30,80,0
+2025,3.7,Biology,Biology,35,60,1
+2025,3.0,Physics,Engineering,25,50,0
+2025,3.9,Computer Science,Computer Science,50,120,1
+2025,3.3,Engineering,Mathematics,60,100,0
+2025,3.4,Mathematics,Mathematics,40,70,1
