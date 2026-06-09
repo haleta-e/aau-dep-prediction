@@ -22,7 +22,7 @@ def submit_senior():
 
     data = request.form.to_dict()
 
-    # Automatically determine admission to preference
+    # auto label
     if data["preferred_department"] == data["admitted_department"]:
         data["admitted_to_preference"] = 1
     else:
@@ -30,14 +30,11 @@ def submit_senior():
 
     df = pd.DataFrame([data])
 
-    if not os.path.exists("seniors.csv"):
-        df.to_csv("seniors.csv", index=False)
-    else:
-        df.to_csv("seniors.csv", mode='a', header=False, index=False)
+    file_exists = os.path.exists("seniors.csv")
+    df.to_csv("seniors.csv", mode='a', header=not file_exists, index=False)
 
     return """
-    Senior data saved successfully.
-    <br><br>
+    <h3>Senior data saved successfully</h3>
     <a href="/freshman">Go to Prediction Page</a>
     """
 
@@ -47,55 +44,42 @@ def submit_senior():
 def predict():
 
     if not os.path.exists("seniors.csv"):
-        return "No historical senior data available."
+        return "No data found"
 
     seniors = pd.read_csv("seniors.csv")
 
-    # Convert types
+    # convert types
     seniors["gpa"] = seniors["gpa"].astype(float)
+    seniors["entrance_exam_score"] = seniors["entrance_exam_score"].astype(float)
     seniors["seats"] = seniors["seats"].astype(int)
     seniors["total_applicants"] = seniors["total_applicants"].astype(int)
     seniors["admitted_to_preference"] = seniors["admitted_to_preference"].astype(int)
 
-    # Create competition ratio
+    # feature engineering
     seniors["competition_ratio"] = seniors["total_applicants"] / seniors["seats"]
 
-    # ML Features
-    X = seniors[["gpa", "competition_ratio"]]
+    # features
+    X = seniors[["gpa", "competition_ratio", "entrance_exam_score"]]
     y = seniors["admitted_to_preference"]
 
-    # Train Logistic Regression Model
     model = LogisticRegression()
     model.fit(X, y)
 
-    # Print model parameters (educational purpose)
-    print("Model Coefficients:", model.coef_)
-    print("Model Intercept:", model.intercept_)
-
-    # Get freshman input
+    # user input
     gpa = float(request.form["gpa"])
     seats = int(request.form["seats"])
     applicants = int(request.form["total_applicants"])
-    dept = request.form["first_choice"]
+    exam_score = float(request.form["entrance_exam_score"])
 
     competition_ratio = applicants / seats
 
-    # Predict Cut Point (minimum admitted GPA historically)
-    dept_data = seniors[seniors["admitted_department"] == dept]
-
-    if dept_data.empty:
-        return "Not enough department data available."
-
-    predicted_cutpoint = round(dept_data["gpa"].min(), 2)
-
-    # ML Probability Prediction
+    # prediction
     probability = model.predict_proba(
-        [[gpa, competition_ratio]]
+        [[gpa, competition_ratio, exam_score]]
     )[0][1]
 
     percent = round(probability * 100, 2)
 
-    # Competition Level
     if competition_ratio > 3:
         competition_level = "High"
     elif competition_ratio > 1.5:
@@ -105,10 +89,8 @@ def predict():
 
     return f"""
     <h2>Admission Prediction Result</h2>
-
-    <p><strong>Predicted Cut Point:</strong> {predicted_cutpoint}</p>
-    <p><strong>Competition Level:</strong> {competition_level}</p>
-    <p><strong>Estimated Admission Probability:</strong> {percent}%</p>
+    <p><b>Admission Probability:</b> {percent}%</p>
+    <p><b>Competition Level:</b> {competition_level}</p>
     """
 
 if __name__ == "__main__":
