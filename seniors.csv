@@ -1,11 +1,25 @@
-year,gpa,preferred_department,admitted_department,seats,total_applicants,admitted_to_preference
-2025,3.8,Computer Science,Computer Science,50,120,1
-2025,3.5,Engineering,Engineering,60,100,1
-2025,3.2,Computer Science,Engineering,50,120,0
-2025,3.6,Mathematics,Mathematics,40,70,1
-2025,3.1,Information System,Computer Science,30,80,0
-2025,3.7,Biology,Biology,35,60,1
-2025,3.0,Physics,Engineering,25,50,0
-2025,3.9,Computer Science,Computer Science,50,120,1
-2025,3.3,Engineering,Mathematics,60,100,0
-2025,3.4,Mathematics,Mathematics,40,70,1
+year,gpa,entrance_exam_score,preferred_department,admitted_department,seats,total_applicants,admitted_to_preference
+2025,3.95,92,Computer Science,Computer Science,50,150,1
+2025,3.90,90,Computer Science,Computer Science,50,150,1
+2025,3.85,88,Computer Science,Computer Science,50,150,1
+2025,3.80,85,Engineering,Engineering,60,140,1
+2025,3.75,83,Engineering,Engineering,60,140,1
+2025,3.70,80,Mathematics,Mathematics,40,80,1
+2025,3.65,78,Biology,Biology,35,70,1
+2025,3.60,76,Information System,Information System,45,90,1
+2025,3.55,74,Computer Science,Computer Science,50,150,1
+2025,3.50,72,Engineering,Engineering,60,140,1
+2025,3.45,70,Mathematics,Mathematics,40,80,1
+2025,3.40,68,Biology,Biology,35,70,1
+2025,3.35,66,Information System,Information System,45,90,1
+2025,3.30,65,Computer Science,Engineering,50,150,0
+2025,3.25,64,Computer Science,Engineering,50,150,0
+2025,3.20,62,Engineering,Mathematics,60,140,0
+2025,3.15,60,Engineering,Information System,60,140,0
+2025,3.10,58,Computer Science,Biology,50,150,0
+2025,3.05,57,Mathematics,Biology,40,80,0
+2025,3.00,55,Information System,Mathematics,45,90,0
+2025,2.95,54,Biology,Information System,35,70,0
+2025,2.90,53,Computer Science,Engineering,50,150,0
+2025,2.85,52,Engineering,Biology,60,140,0
+2025,2.80,50,Mathematics,Information System,40,80,0
